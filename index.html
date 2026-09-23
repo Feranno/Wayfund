@@ -896,9 +896,8 @@ function renderHistory() {
 async function init() {
   if (SUPABASE_READY) {
     const { data: { session } } = await sb.auth.getSession();
-    if (!session) { window.location.href = '/auth'; return; }
-    currentUser = session.user;
-    document.getElementById('signOutBtn').style.display = 'block';
+    if (!session) { /* auth bypass — remove this comment to re-enable: window.location.href = '/auth'; return; */ }
+    else { currentUser = session.user; document.getElementById('signOutBtn').style.display = 'block'; }
   }
   await loadState();
   render();
